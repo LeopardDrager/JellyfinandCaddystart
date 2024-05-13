@@ -36,14 +36,14 @@ case $choice in
         systemctl start caddy #stating caddy
         sleep 2
 
-        if [[ `systemctl status jellyfin | grep "active"` ]]; then #Checking to make sure Jellyfin is up
+        if [[ `systemctl status jellyfin | grep "$status"` ]]; then #Checking to make sure Jellyfin is up
             echo "Jellyfin is up and runing"
         else
             system="jellyfin"
             error
         fi
         sleep 5
-        if [[ `systemctl status caddy | grep "active"` ]]; then #Checking to make sure caddy is up
+        if [[ `systemctl status caddy | grep "$status"` ]]; then #Checking to make sure caddy is up
             echo -e 'Caddy is up and runing. \n'
             exit 0
         else
@@ -65,14 +65,14 @@ case $choice in
         check  #running check to see if system is already down.
         systemctl stop caddy 
             
-        if [[ `systemctl status jellyfin | grep "inactive (dead)"` ]]; then #checking to see if jellyfin is down
+        if [[ `systemctl status jellyfin | grep "$status"` ]]; then #checking to see if jellyfin is down
             echo "Jellyfin is now turned off."
         else
             echo "Something went wrong please try again"
             exit 1
         fi  
 
-        if [[ `systemctl status jellyfin | grep "inactive (dead)"` ]]; then  #checking to see if caddy is down
+        if [[ `systemctl status jellyfin | grep "$status"` ]]; then  #checking to see if caddy is down
             echo "Caddy is now turned off."
             exit 0
         else
