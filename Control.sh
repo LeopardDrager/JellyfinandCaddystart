@@ -7,7 +7,7 @@ function error() {
 
 }
 function check() { #check to see if system is already down or up so user doesn't create mutiple instances, as this can lead to confusion on for caddy
-    if [[ `systemctl status $system | grep $status`]]; then
+    if [[ `systemctl status $system | grep $status` ]]; then
         echo "system is already running"
         exit 0
 
